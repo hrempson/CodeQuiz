@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+}
+
+.btn {
+    background-color: purple;
+    border-color: black;
+}
+
+.timer {
+    text-align: center;
+}
+
+.answerbutton {
+    margin-bottom: 1em;
+}
