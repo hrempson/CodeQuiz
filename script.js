@@ -3,54 +3,54 @@ var question = document.querySelector("question");
 var answer = document.querySelector("answer");
 var answerButton = document.querySelector("answerbutton");
 var submitButton = document.querySelector("btn");
-var quiz = [
-    {
-    question: "What is jQuery?",
+var currentQuestion = -1;
+var quiz = [{
+        question: "What is jQuery?",
         answers: {
-        a: "A JavaScript library",
-        b: "A text editor",
-        c: "A github repository",
-    },
+            a: "A JavaScript library",
+            b: "A text editor",
+            c: "A github repository",
+        },
         correctAnswer: "a"
     },
-    { question: "What is vanilla Javascript?",
+    {
+        question: "What is vanilla Javascript?",
         answers: {
-        a: "A JavaScript library",
-        b: "Basic JavaScript",
-        c: "A JavaScrit Library",
-    },
+            a: "A JavaScript library",
+            b: "Basic JavaScript",
+            c: "A JavaScrit Library",
+        },
         correctAnswer: 'b'
     },
-    { question: "Who founded JavaScript?",
+    {
+        question: "Who founded JavaScript?",
         answers: {
-        a: "Bill Gates",
-        b: "Larry Page",
-        C: "Brendan Eich",
-    }, 
-    correctAnswer: "c"
-    }];
-    
+            a: "Bill Gates",
+            b: "Larry Page",
+            C: "Brendan Eich",
+        },
+        correctAnswer: "c"
+    }
+];
 
 
-
-//  secondsElapsed = 0;
-    // setTime();
-    // secondsLeft();
-
-var time = secondsLeft
-var secondsLeft = "90"
+var secondsLeft = 3;
 // countdown timer in seconds
-var secondsLeft = setInterval(function() {
-var seconds = Math.floor((distance % (1000 * secondsLeft)) / 1000);
-document.getElementById("timer").innerHTML = secondsLeft + " seconds";
+var countdownTimerId = setInterval(displayTime, 1000);
+
+function displayTime() {
+    var seconds = secondsLeft--;
+    if (seconds > 0) {
+        document.querySelector(".timer").innerHTML = seconds + " seconds";
+    } else {
+        clearInterval(countdownTimerId);
+        document.querySelector(".timer").innerHTML = "Game Over!";
+    }
+}
 //timer.appendChild; ?
 
 //clear timer @ Game Over
-if (distance < 0) {
-    clearInterval(timer);
-    document.getElementById("timer").innerHTML = "Game Over!";
-  }
-}, 1000);
+
 
 
 
@@ -63,18 +63,31 @@ document.getElementById("#question")
 //append
 
 
-document.getElementById ("#answer")
-// create 4 answers per question
+document.getElementById("#answer")
 
-// on click, show next question
-function nextQuestion(event) {
-    if (answerButton === true) {
-    answerButton.addEevntListener("click", Question)
-    }
-    else ( secondsLeft - 10 ); // subtract 10s from timer
+function nextQuestion (event) {
+    if (currentQuestion < quiz.length - 1) {
+            currentQuestion++;}
+    else {
+        // END OF QUIZ
+         console.log ('End of quiz');
+          }
+         console.log (quiz[currentQuestion]);
+          //   if (answerButton === true) {
+          //     answerButton.addEventListener ('click', Question);
+          //   } else {
+          //     secondsLeft - 10; // subtract 10s from timer
+          //   }
+        }
 
 
+// // on click, show next question
+// function nextQuestion(event) {
+//     if (answerButton === true) {
+//         answerButton.addEventListener("click", Question)
+//     } else {
+//         secondsLeft - 10; // subtract 10s from timer
+
+// }
 // event listeners
-// submitButton.addEventListener("click", startTimer);
-
-
+// submitButton.addEventListener("click", startTimer)
