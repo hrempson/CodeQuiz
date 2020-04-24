@@ -1,7 +1,7 @@
 var timer = document.querySelector("timer");
 var question = document.querySelector("question");
 var answer = document.querySelector("answer");
-var answerButton = document.querySelector("answerbutton");
+var answer1 = document.querySelector("answerbutton");
 var submitButton = document.querySelector("btn");
 
 
@@ -75,8 +75,6 @@ function nextQuestion() {
     } 
     else {
         alert("Game Over!");
-        
-
     }
 }
 $(".question").append(currentQuestion);
@@ -84,10 +82,10 @@ $(".question").append(currentQuestion);
 // Answer buttons populate data from quiz array
 var quizAnswers = quiz[0].answers;
 // console.log(quiz[0].answers);
-var answerBtn = answerButton 
+var answerBtn = answer1; 
 
 
-$(".answerbutton").append(quizAnswers);
+$(".answer1").append(quizAnswers);
 
 
 // answerBtn.click(function () {
