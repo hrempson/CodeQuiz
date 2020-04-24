@@ -3,7 +3,9 @@ var question = document.querySelector("question");
 var answer = document.querySelector("answer");
 var answerButton = document.querySelector("answerbutton");
 var submitButton = document.querySelector("btn");
-var currentQuestion = -1;
+
+
+
 const quiz = [{
         question: "What is jQuery?",
         answers: {
@@ -33,9 +35,8 @@ const quiz = [{
     }
 ];
 
-
 // Start button
-var quizQuestions = quiz.question
+var quizQuestions = quiz[0].question
 var startBtn = $("<button>Start Quiz</button>")
 startBtn.click(function () {
     var startTimer = confirm("Go!")
@@ -44,8 +45,6 @@ startBtn.click(function () {
         startGame = displayTime;
         // hide start.Btn 
         startBtn.hide();
-        quizQuestions;
-        
     }
 
 // Timer
@@ -66,42 +65,46 @@ startBtn.click(function () {
 //append to html
 $(".question").append(startBtn);
 
-// 
+//Quiz questions begin
 
-
-
-
-
-// function nextQuestion(event) {
-//     if (currentQuestion < quiz.length - 1) {
-//         currentQuestion++;
-//     } 
-//     else {
-//         alert("Game Over!")
-//     }
-
-
-// var answerBtn = currentQuestion++;
-// answerBtn.click(nextQuestion() {
-
-// }
-
+var currentQuestion = quiz[0].question;
+// console.log(currentQuestion)
 function nextQuestion() {
-    if (currentQuestion < quiz.length - 1) {
+    if (currentQuestion < quiz.length -1) {
         currentQuestion++;
     } 
     else {
         alert("Game Over!");
-        // END OF QUIZ
+        
 
     }
 }
 $(".question").append(currentQuestion);
 
+// Answer buttons populate data from quiz array
+var quizAnswers = quiz[0].answers;
+// console.log(quiz[0].answers);
+var answerBtn = answerButton 
 
+
+$(".answerbutton").append(quizAnswers);
+
+
+// answerBtn.click(function () {
+//     nextQuestion;
+// })
+
+
+//when incorrect answer is clicked, subtrack 10 seconds from timer
 // // on click, show next question
 // function nextQuestion(event) {
 //     if (answerBtn === true) {
 //         answerBtn.addEventListener("click", Question)
 //     } else {
 //         secondsLeft - 10; // subtract 10s from timer
+
+
+
+
+
+//when game is over, display form for scoreboard
