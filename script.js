@@ -80,12 +80,12 @@ function nextQuestion() {
 $(".question").append(currentQuestion);
 
 // Answer buttons populate data from quiz array
-var quizAnswers = quiz[0].answers;
+var quizAnswers = quiz[0].answer;
 // console.log(quiz[0].answers);
 var answerBtn = answer1; 
 
 
-$(".answer1").append(quizAnswers);
+$("#answer1").append(quizAnswers);
 
 
 // answerBtn.click(function () {
