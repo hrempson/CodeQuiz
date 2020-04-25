@@ -1,7 +1,7 @@
 var timer = document.querySelector("timer");
 var question = document.querySelector("question");
 var answer = document.querySelector("answer");
-var answer1 = document.querySelector("answerbutton");
+var answer1 = document.querySelector("answer1");
 var submitButton = document.querySelector("btn");
 
 
@@ -38,6 +38,7 @@ const quiz = [{
 // Start button
 var quizQuestions = quiz[0].question
 var startBtn = $("<button>Start Quiz</button>")
+
 startBtn.click(function () {
     var startTimer = confirm("Go!")
     //confirm === true, start timer
@@ -64,7 +65,7 @@ startBtn.click(function () {
 });
 //append to html
 $(".question").append(startBtn);
-
+// document.getElementsByClassName("question").innerHTML = "Quiz Done!"
 //Quiz questions begin
 
 var currentQuestion = quiz[0].question;
@@ -80,10 +81,9 @@ function nextQuestion() {
 $(".question").append(currentQuestion);
 
 // Answer buttons populate data from quiz array
-var quizAnswers = quiz[0].answer;
+var quizAnswers = quiz[0].answers;
 // console.log(quiz[0].answers);
 var answerBtn = answer1; 
-
 
 $("#answer1").append(quizAnswers);
 
