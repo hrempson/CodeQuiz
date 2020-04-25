@@ -12,7 +12,13 @@ h1 {
     text-align: center;
 }
 
-.answer3 {
+#answer3 {
+    margin-bottom: 2em;
+}
+#answer2 {
+    margin-bottom: 2em;
+}
+#answer1{
     margin-bottom: 2em;
 }
 
