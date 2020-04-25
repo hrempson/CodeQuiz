@@ -83,7 +83,7 @@ function nextQuestion() {
 $(".question").append(currentQuestion);
 
 // Answer buttons populate data from quiz array
-var quizAnswers1 = quiz[0].answers;
+var quizAnswers1 = quiz[0].answers[0];
 var quizAnswers2 = quiz[0].answers[1];
 var quizAnswers3 = quiz[0].answers[2];
 // console.log(quiz[0].answers);
@@ -92,6 +92,16 @@ var answerBtn = answer1;
 $("#answer1").append(quizAnswers1);
 $("#answer2").append(quizAnswers2);
 $("#answer3").append(quizAnswers3);
+
+
+// //validate answers
+// document.addEventListener("click", validateAnswer);
+//     answer.click(validateAnswer) 
+//     if  = "A JavaSctipt library");
+//     alert("correct");
+   
+
+
 
 
 // answerBtn.click(function () {
