@@ -3,8 +3,9 @@ h1 {
 }
 
 .btn {
-    background-color: purple;
+    background-color: #800080;
     border-color: black;
+    margin-top: 2em;
 }
 
 .timer {
@@ -12,6 +13,8 @@ h1 {
 }
 
 .answer3 {
-    margin-bottom: 1em;
+    margin-bottom: 2em;
+
+
 }
 
