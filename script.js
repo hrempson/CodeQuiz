@@ -6,49 +6,51 @@ var submitButton = document.querySelector(".btn");
 var score = 0;
 const quiz = [{
         question: "What is jQuery?",
-        answers: {
-            a: "A JavaScript library",
-            b: "A text editor",
-            c: "A github repository",
-        },
+        answers: [
+            "A JavaScript library",
+            "A text editor",
+            "A github repository",
+        ],
         correctAnswer: "A JavaSctipt library"
     },
     {
         question: "What is vanilla Javascript?",
-        answers: {
-            a: "A JavaScript library",
-            b: "Basic JavaScript",
-            c: "A JavaScrit Library",
-        },
+        answers: [
+            "A JavaScript library",
+            "Basic JavaScript",
+            "A JavaScrit Library",
+    ],
         correctAnswer: 'Basic JavaScript'
     },
     {
         question: "Who founded JavaScript?",
-        answers: {
-            a: "Bill Gates",
-            b: "Larry Page",
-            C: "Brendan Eich",
-        },
+        answers: [
+            "Bill Gates",
+            "Larry Page",
+            "Brendan Eich",
+    ],
         correctAnswer: "Brendan Eich"
     }
 ];
 
 var currentQuestion = quiz[0].question;
-var quizAnswers = quiz[0].answers;
 
-//start button
-var startBtn = $("<button>Start Quiz</button>");
+
+
+// Start button
+var quizQuestions = quiz[0].question
+var startBtn = $("<button>Start Quiz</button>")
+
 startBtn.click(function () {
-    var startTimer = confirm("Go!");
+    var startTimer = confirm("Go!")
     //confirm === true, start timer
     if (startTimer === true) {
-        startQuiz = displayTime;
+        startGame = displayTime;
         // hide start.Btn 
         startBtn.hide();
-
     }
 
-    // Timer
+// Timer
     var secondsLeft = 3;
     var countdownTimerId = setInterval(displayTime, 1000);
 
@@ -62,39 +64,34 @@ startBtn.click(function () {
             document.querySelector(".timer").innerHTML = "Game Over!";
         }
     }
-
-        function nextQuestion() {
-            if (currentQuestion < quiz.length - 1) {
-                currentQuestion++;
-            } else {
-                alert("Game Over!");
-            }
-            if (quizAnswers.click(nextQuestion()));
-
-        }
-    
-        answerBtn.addEventListener("click", nextQuestion);
-
-    
 });
-// score calculation : seconds left
-// form to submit score
-
-
-
 //append to html
 $(".question").append(startBtn);
+// document.getElementsByClassName("question").innerHTML = "Quiz Done!"
+//Quiz questions begin
+
+var currentQuestion = quiz[0].question;
+// console.log(currentQuestion)
+function nextQuestion() {
+    if (currentQuestion < quiz.length -1) {
+        currentQuestion++;
+    } 
+    else {
+        alert("Game Over!");
+    }
+}
 $(".question").append(currentQuestion);
-$(".answer1").append(quizAnswers);
 
 // Answer buttons populate data from quiz array
-
+var quizAnswers1 = quiz[0].answers;
+var quizAnswers2 = quiz[0].answers[1];
+var quizAnswers3 = quiz[0].answers[2];
 // console.log(quiz[0].answers);
-var answerBtn = ("answer1");
-var answerBtn = answer2;
+var answerBtn = answer1; 
 
-
-
+$("#answer1").append(quizAnswers1);
+$("#answer2").append(quizAnswers2);
+$("#answer3").append(quizAnswers3);
 
 
 // answerBtn.click(function () {
