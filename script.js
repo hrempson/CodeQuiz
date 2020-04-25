@@ -39,15 +39,28 @@ var currentQuestion = quiz[0].question;
 
 // Start button
 var quizQuestions = quiz[0].question
-var startBtn = $("<button>Start Quiz</button>")
 
+var currentQuestion = quiz[0].question;
+
+var startBtn = $("<button>Start Quiz</button>")
+$(".question").html(startBtn);
 startBtn.click(function () {
     var startTimer = confirm("Go!")
     //confirm === true, start timer
+    
     if (startTimer === true) {
         startGame = displayTime;
-        // hide start.Btn 
         startBtn.hide();
+        $(".question").append(currentQuestion);
+        // Answer buttons populate data from quiz array
+        var quizAnswers1 = quiz[0].answers[0];
+        var quizAnswers2 = quiz[0].answers[1];
+        var quizAnswers3 = quiz[0].answers[2];
+        // console.log(quiz[0].answers);
+        var answerBtn = answer1; 
+        $("#answer1").append(quizAnswers1);
+        $("#answer2").append(quizAnswers2);
+        $("#answer3").append(quizAnswers3);
     }
 
 // Timer
@@ -66,12 +79,10 @@ startBtn.click(function () {
     }
 });
 //append to html
-$(".question").append(startBtn);
-// document.getElementsByClassName("question").innerHTML = "Quiz Done!"
+
+
 //Quiz questions begin
 
-var currentQuestion = quiz[0].question;
-// console.log(currentQuestion)
 function nextQuestion() {
     if (currentQuestion < quiz.length -1) {
         currentQuestion++;
@@ -79,19 +90,13 @@ function nextQuestion() {
     else {
         alert("Game Over!");
     }
+
 }
-$(".question").append(currentQuestion);
 
-// Answer buttons populate data from quiz array
-var quizAnswers1 = quiz[0].answers[0];
-var quizAnswers2 = quiz[0].answers[1];
-var quizAnswers3 = quiz[0].answers[2];
-// console.log(quiz[0].answers);
-var answerBtn = answer1; 
 
-$("#answer1").append(quizAnswers1);
-$("#answer2").append(quizAnswers2);
-$("#answer3").append(quizAnswers3);
+
+
+
 
 
 // //validate answers
