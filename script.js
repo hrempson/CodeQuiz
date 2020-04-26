@@ -111,8 +111,16 @@ function validateQuestion(event) {
             showResults();
         }
     } else {
-        // if question is wrong, decriment 10 seconds
-        timer -= 10;
+        if ( timer > 10) {
+            // if question is wrong, decriment 10 seconds
+            timer -= 10;
+        }
+        else {
+            timer = 0;
+            showResults();
+            
+        }
+        
     }
 }
 
