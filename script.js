@@ -18,9 +18,9 @@ const quiz = [{
     {
         question: "What is vanilla Javascript?",
         answers: [
-            "A JavaScript library",
+            "A flavor of ice cream",
             "Basic JavaScript",
-            "Answer3",
+            "Boring JavaScript",
         ],
         correctAnswer: 'Basic JavaScript'
     },
@@ -89,12 +89,18 @@ startBtn.click(function () {
 
             } else {
                 secondsLeft -= 10;
-                alert("Correct!")
+                
+                $(".question").html(currentQuestion2);
+                $("#answer1").html(quizAnswers4);
+                $("#answer2").html(quizAnswers5);
+                $("#answer3").html(quizAnswers6);
+            
             }
             if ($(event.target).text() === quiz[1].correctAnswer){
-                confirm("Game over! Enter high score!");
+                // confirm("Game over! Enter high score!");
+                alert("Correct!");
             }
-                
+            
           
                 
 
