@@ -1,11 +1,13 @@
-var timer = document.querySelector(".timer");
-var question = document.querySelector(".question");
-var answer = document.querySelector(".answer");
-var answer1 = document.querySelector("#answer1");
+// Global objects for quiz
+var elsapsedTime = null;
+var quizFinished = false;
+var quizTime = 30;
+var timer = quizTime;
+var currentQuestion = 0;
+// UI elements:
+var submitBtn
 
-var submitButton = document.querySelector("#submit");
-var currentQuestionCounter = 0;
-var score = 0;
+// Global quiz object
 const quiz = [{
         question: "What is jQuery?",
         answers: [
@@ -22,7 +24,7 @@ const quiz = [{
             "Basic JavaScript",
             "Boring JavaScript",
         ],
-        correctAnswer: 'Basic JavaScript'
+        correctAnswer: "Basic JavaScript"
     },
     {
         question: "Who founded JavaScript?",
@@ -32,169 +34,129 @@ const quiz = [{
             "Brendan Eich",
         ],
         correctAnswer: "Brendan Eich"
+    },
+    {
+        question: "Who was the first computer programmer?",
+        answers: [
+            "Ada Lovelace",
+            "Steve Jobs",
+            "Dennis Ritchie",
+        ],
+        correctAnswer: "Ada Lovelace"
     }
 ];
 
-var currentQuestion = quiz[0].question;
+// Start button creation
+var startBtn = $("<button>Start Quiz</button>");
+$(".controls").html(startBtn);
+$(".controls").on("click", startQuiz);
+// Hide form until quiz completes
+$(".scoreboard").hide();
 
-var quizQuestions = quiz[0].question;
-var currentQuestion = quiz[0].question;
-var currentQuestion2 = quiz[1].question;
-var currentQuestion3 = quiz[2].question;
-var validateAnswer1 = quiz[0].correctAnswer;
-var validateAnswer2 = quiz[1].correctAnswer;
+// Validate answer click
+$(".answers").on("click", validateQuestion);
 
-
-
-// Start Button
-var startBtn = $("<button>Start Quiz</button>")
-$(".question").html(startBtn);
-
-startBtn.click(function () {
-    var startTimer = confirm("Go!")
-    //confirm === true, start timer
-
-    if (startTimer === true) {
-        startGame = displayTime;
-        startBtn.hide();
-        
-        
-        $(".question").append(currentQuestion);
-        // Answer buttons populate data from quiz array
-        var quizAnswers1 = quiz[0].answers[0];
-        var quizAnswers2 = quiz[0].answers[1];
-        var quizAnswers3 = quiz[0].answers[2];
-        var quizAnswers4 = quiz[1].answers[0];
-        var quizAnswers5 = quiz[1].answers[1];
-        var quizAnswers6 = quiz[1].answers[2];
-        // var quizAnswers7 = quiz[2].answers[0];
-        // var quizAnswers8 = quiz[2].answers[1];
-        // var quizAnswers9 = quiz[2].answers[2];
-
-
-        var answerBtn = answer1;
-        $("#answer1").append(quizAnswers1);
-        $("#answer2").append(quizAnswers2);
-        $("#answer3").append(quizAnswers3);
-
-        // click events for answer1,2,3 buttons
-        $(".answers").on("click", function (event) {
-            //console.log($(event.target).text(),quiz[0].correctAnswer, $("#answer1").text());
-            //console.log($(event.target).text());
-            if ($(event.target).text() === quiz[0].correctAnswer) {
-                confirm("correct!");
-                $(".question").html(currentQuestion2);
-
-                $("#answer1").html(quizAnswers4);
-                $("#answer2").html(quizAnswers5);
-                $("#answer3").html(quizAnswers6);
-
-            } 
-            else if ($(event.target).text() !== quiz[1].correctAnswer) {
-                secondsLeft -= 10;
-            
-                $(".question").html(currentQuestion2);
-                $("#answer1").html(quizAnswers4);
-                $("#answer2").html(quizAnswers5);
-                $("#answer3").html(quizAnswers6);
-            }
-        
-            else $(event.target).text() === quiz[1].correctAnswer 
-                var highScore = prompt("End of quiz! Click ok to enter high score!");
-                if (highScore === true) {
-                var name = "";
-
-
-                // alert("Correct!");
-            
-            
-          
-                
-
-
-
-                // if ($(event.target).text() === quiz[1].correctAnswer) {
-                // confirm("correct!");
-                // // alert("Go to scoreboard!")
-                // $(".question").html(currentQuestion3);
-
-                // $("#answer1").html(quizAnswers7);
-                // $("#answer2").html(quizAnswers8);
-                // $("#answer3").html(quizAnswers9);
-                // if ($(event.target).text() === quiz[2].correctAnswer) {
-                //     confirm("correct!");
-                // } else {
-                //     alert("End of Quiz!")
-                // }
-
-            
-
-
-            // }
-        }})
-
-        // Timer
-        var secondsLeft = 30;
-        var countdownTimerId = setInterval(displayTime, 1000);
-
-        function displayTime() {
-            var seconds = secondsLeft--;
-            if (seconds > 0) {
-                document.querySelector(".timer").innerHTML = ":" + seconds;
-            } else {
-                clearInterval(countdownTimerId);
-                //clear timer @ Game Over////
-                document.querySelector(".timer").innerHTML = "Game Over!";
-            }
-        }
-    }
+// Handle form submit
+$("#scoreboard").submit(function (event) {
+    var $inputs = $('#scoreboard :input');
+    var leaderText = "";
+    $inputs.each(function () {
+        leaderText += $(this).val() + " ";
+    });
+    leaderText += " " + elsapsedTime + " seconds <br>"
+    $(".leaders").prepend(leaderText);
+    restartQuiz()
+    // Prevents form from refreshing the page on submit
+    event.preventDefault();
 })
 
-//append to html
+// Start quiz method
+function startQuiz() {
+    // Hide quiz button
+    startBtn.hide();
+    // Start timer
+    displayTime();
+    displayQuestion(currentQuestion);
+}
 
-
-//Quiz questions begin until all have been
-
-
-
-function nextQuestion() {
-    if (currentQuestion < quiz.length - 1) {
-        currentQuestion++;
+// Display time in UI method
+function displayTime() {
+    // Decriment timer by 1 sec
+    var seconds = timer--;
+    // If seconds are greater than 0 and quiz has not finished
+    if (seconds > 0 && quizFinished === false) {
+        // Set UI value, call timer again if > 0
+        document.querySelector(".timer").innerHTML = ":" + seconds;
+        setTimeout(this.displayTime, 1000);
     } else {
-        alert("Game Over!");
-
+        // Clear timer @ Game Over
+        document.querySelector(".timer").innerHTML = "Quiz Complete!";
     }
-};
+}
 
+// Stop timer when quiz finishes
+function stopTimer() {
+    quizFinished = true
+}
 
+// Validate user answer to question method
+function validateQuestion(event) {
+    if ($(event.target).text() === quiz[currentQuestion].correctAnswer) {
+        // check that there is another question
+        if (currentQuestion < quiz.length - 1) {
+            currentQuestion++;
+            displayQuestion(currentQuestion);
+        } else {
+            // Quiz is finished, show results
+            showResults();
+        }
+    } else {
+        // if question is wrong, decriment 10 seconds
+        timer -= 10;
+    }
+}
 
+// Show Results
+function showResults() {
+    stopTimer();
+    // Store elapsed time
+    elsapsedTime = quizTime - timer;
+    $(".message").html("You've finished the quiz in " + elsapsedTime + " seconds");
+    // Show scoreboard when quiz completes
+    $(".scoreboard").show();
+    // When name submitted show scoreboard
+}
 
+// Display question method
+function displayQuestion(questionIndex) {
+    // populate question title
+    $(".question").html(quiz[questionIndex].question);
+    // populate answers options in html
+    for (let i = 0; i < quiz[questionIndex].answers.length; i++) {
+        // appending answers to html
+        $("#answer" + i).html(quiz[questionIndex].answers[i])
+    }
+}
 
-// //validate answers
-// document.addEventListener("click", validateAnswer);
-//     answer.click(validateAnswer) 
-//     if  = "A JavaSctipt library");
-//     alert("correct");
+// Restart quiz
+function restartQuiz() {
+    $(".scoreboard").hide();
+    elsapsedTime = null;
+    quizFinished = false;
+    quizTime = 30;
+    timer = quizTime;
+    currentQuestion = 0;
+    resetQuestion();
+    startBtn.show();
+}
 
-
-
-
-
-// answerBtn.click(function () {
-//     nextQuestion;
-// })
-
-
-//when incorrect answer is clicked, subtrack 10 seconds from timer
-// // on click, show next question
-// function nextQuestion(event) {
-//     if (answerBtn === true) {
-//         answerBtn.addEventListener("click", Question)
-//     } else {
-//         secondsLeft - 10; // subtract 10s from timer
-
-
-
-
-
-//when game is over, display form for scoreboard
+// Set question state back to original
+function resetQuestion() {
+    // populate question title
+    $(".question").html("");
+    // populate answers options in html
+    for (let i = 0; i < 3; i++) {
+        // appending answers to html
+        $("#answer" + i).html("")
+    }
+}
