@@ -3,7 +3,7 @@ var question = document.querySelector(".question");
 var answer = document.querySelector(".answer");
 var answer1 = document.querySelector("#answer1");
 
-var submitButton = document.querySelector(".btn");
+var submitButton = document.querySelector("#submit");
 var currentQuestionCounter = 0;
 var score = 0;
 const quiz = [{
@@ -57,6 +57,8 @@ startBtn.click(function () {
     if (startTimer === true) {
         startGame = displayTime;
         startBtn.hide();
+        
+        
         $(".question").append(currentQuestion);
         // Answer buttons populate data from quiz array
         var quizAnswers1 = quiz[0].answers[0];
@@ -87,19 +89,24 @@ startBtn.click(function () {
                 $("#answer2").html(quizAnswers5);
                 $("#answer3").html(quizAnswers6);
 
-            } else {
+            } 
+            else if ($(event.target).text() !== quiz[1].correctAnswer) {
                 secondsLeft -= 10;
-                
+            
                 $(".question").html(currentQuestion2);
                 $("#answer1").html(quizAnswers4);
                 $("#answer2").html(quizAnswers5);
                 $("#answer3").html(quizAnswers6);
+            }
+        
+            else $(event.target).text() === quiz[1].correctAnswer 
+                var highScore = prompt("End of quiz! Click ok to enter high score!");
+                if (highScore === true) {
+                var name = "";
+
+
+                // alert("Correct!");
             
-            }
-            if ($(event.target).text() === quiz[1].correctAnswer){
-                // confirm("Game over! Enter high score!");
-                alert("Correct!");
-            }
             
           
                 
@@ -124,7 +131,7 @@ startBtn.click(function () {
 
 
             // }
-        })
+        }})
 
         // Timer
         var secondsLeft = 30;
