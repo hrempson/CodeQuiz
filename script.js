@@ -4,7 +4,6 @@ var quizFinished = false;
 var quizTime = 30;
 var timer = quizTime;
 var currentQuestion = 0;
-// UI elements:
 var submitBtn
 
 // Global quiz object
@@ -70,7 +69,7 @@ $("#scoreboard").submit(function (event) {
     event.preventDefault();
 })
 
-// Start quiz method
+// Start quiz function
 function startQuiz() {
     // Hide quiz button
     startBtn.hide();
@@ -79,7 +78,7 @@ function startQuiz() {
     displayQuestion(currentQuestion);
 }
 
-// Display time in UI method
+// Display time in html function
 function displayTime() {
     // Decriment timer by 1 sec
     var seconds = timer--;
@@ -99,7 +98,7 @@ function stopTimer() {
     quizFinished = true
 }
 
-// Validate user answer to question method
+// Validate user answer to question function
 function validateQuestion(event) {
     if ($(event.target).text() === quiz[currentQuestion].correctAnswer) {
         // check that there is another question
@@ -135,7 +134,7 @@ function showResults() {
     // When name submitted show scoreboard
 }
 
-// Display question method
+// Display question function
 function displayQuestion(questionIndex) {
     // populate question title
     $(".question").html(quiz[questionIndex].question);
