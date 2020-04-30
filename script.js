@@ -70,11 +70,7 @@ $("#scoreboard").submit(function (event) {
     });
     leaderText += " " + elsapsedTime + " seconds <br>"
     $(".leaders").prepend(leaderText);
-    try {
         localStorage.setItem("leaders", $(".leaders").html());
-    }catch(e){
-        console.log(e)
-    }
     restartQuiz()
     // Prevents form from refreshing the page on submit
     event.preventDefault();
