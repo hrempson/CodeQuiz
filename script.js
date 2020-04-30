@@ -45,6 +45,12 @@ const quiz = [{
     }
 ];
 
+$(document).ready(initialize)
+function initialize() {
+    var leaderText = localStorage.getItem("leaders")
+    $(".leaders").prepend(leaderText);
+}
+
 // Start button creation
 var startBtn = $("<button>Start Quiz</button>");
 $(".controls").html(startBtn);
@@ -64,9 +70,15 @@ $("#scoreboard").submit(function (event) {
     });
     leaderText += " " + elsapsedTime + " seconds <br>"
     $(".leaders").prepend(leaderText);
+    try {
+        localStorage.setItem("leaders", $(".leaders").html());
+    }catch(e){
+        console.log(e)
+    }
     restartQuiz()
     // Prevents form from refreshing the page on submit
     event.preventDefault();
+    
 })
 
 // Start quiz function
@@ -124,14 +136,17 @@ function validateQuestion(event) {
 }
 
 // Show Results
+$("<div>High Scores: </div>").insertBefore(".leaders");
 function showResults() {
     stopTimer();
     // Store elapsed time
     elsapsedTime = quizTime - timer;
     $(".message").html("You've finished the quiz in " + elsapsedTime + " seconds");
     // Show scoreboard when quiz completes
+    
     $(".scoreboard").show();
     // When name submitted show scoreboard
+    
 }
 
 // Display question function
